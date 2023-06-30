@@ -77,4 +77,9 @@ public class ShopTest {
         assertEquals(132.80, shop.calculateTotalPotentialProfitForStock(), 0.0);
     }
 
+    @Test
+    public void hasStaff(){
+        assertEquals(0, shop.getStaff().size());
+    }
+
 }

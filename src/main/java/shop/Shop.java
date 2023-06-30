@@ -1,19 +1,24 @@
 package shop;
 
+import People.StaffMember;
 import behaviours.ISell;
 import items.Item;
 import items.StringInstrument;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Shop {
 
     private HashMap<ISell, Integer> stock;
 
+    private ArrayList<StaffMember> staff;
+
     private double dailyProfits;
 
     public Shop(){
         this.stock = new HashMap<>();
+        this.staff = new ArrayList<>();
         this.dailyProfits = 0;
     }
 
@@ -23,6 +28,10 @@ public class Shop {
 
     public double getDailyProfits() {
         return dailyProfits;
+    }
+
+    public ArrayList<StaffMember> getStaff() {
+        return staff;
     }
 
     //this one could also take ISell as an argument.
