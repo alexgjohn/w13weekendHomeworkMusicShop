@@ -14,11 +14,14 @@ public class Shop {
 
     private ArrayList<StaffMember> staff;
 
+    private HashMap<StaffMember, Integer> staffOnShift;
+
     private double dailyProfits;
 
     public Shop(){
         this.stock = new HashMap<>();
         this.staff = new ArrayList<>();
+        this.staffOnShift = new HashMap<>();
         this.dailyProfits = 0;
     }
 
@@ -32,6 +35,14 @@ public class Shop {
 
     public ArrayList<StaffMember> getStaff() {
         return staff;
+    }
+
+    public HashMap<StaffMember, Integer> getStaffOnShift() {
+        return staffOnShift;
+    }
+
+    public void addStaff(StaffMember staffMember){
+        staff.add(staffMember);
     }
 
     //this one could also take ISell as an argument.
@@ -65,5 +76,23 @@ public class Shop {
             totalPotentialProfit += potentialProfitForItem;
         }
         return totalPotentialProfit;
+    }
+
+    public void addShift(StaffMember staffMember, int shiftLength) {
+        staffOnShift.put(staffMember, shiftLength);
+    }
+
+    public void payStaff() {
+        double totalWagesPaid = 0;
+        for (StaffMember staffMember:getStaffOnShift().keySet()){
+            double result = staffMember.getPaid(getStaffOnShift().get(staffMember));
+            totalWagesPaid += result;
+        }
+        dailyProfits -= totalWagesPaid;
+    }
+
+    public void endOfDay() {
+        payStaff();
+        staffOnShift.clear();
     }
 }
